@@ -29,4 +29,18 @@ class Gallery extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
-}
+
+    public static function search($value = null){
+        $query = self::query();
+
+        if($value){
+            $query->whereHas('user', function($query) use ($value) 
+            { $query->where('title', 'like', '%'.$value.'%') 
+                ->orWhere('description', 'like', '%'.$value.'%')
+                ->orWhere('firstname', 'like', '%'.$value.'%')
+                ->orWhere('lastname', 'like', '%'.$value.'%'); });
+        }
+        return $query;
+        }
+    }
+

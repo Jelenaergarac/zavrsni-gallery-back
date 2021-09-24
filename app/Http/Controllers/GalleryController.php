@@ -18,10 +18,10 @@ class GalleryController extends Controller
      */
     public function index(Request $request)
     {
-        // $title = $request->query('title');
-        // $galleries = Gallery::search();
-        $galleries = Gallery::query()->with(['images', 'comments', 'user'])->orderBy('created_at', 'desc')->paginate(10);
-       
+        
+             $value = $request->query('value');
+        $galleries = Gallery::search($value)->with('images', 'user', 'comments')->orderBy('created_at', 'desc')->paginate(10);
+        
         return response()->json($galleries);
     }
 
