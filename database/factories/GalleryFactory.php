@@ -26,7 +26,7 @@ class GalleryFactory extends Factory
         return [
            
             'title'=>$this->faker->sentence(4,true),
-            'description'=> $this->faker->text(200),
+            'description'=> $this->faker->text(350),
              'user_id'=> User::inRandomOrder()->first()->id,
 
 

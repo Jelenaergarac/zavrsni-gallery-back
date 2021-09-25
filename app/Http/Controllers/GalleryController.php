@@ -42,10 +42,15 @@ class GalleryController extends Controller
         $gallery->user()->associate(Auth::user());
         $gallery->save();
 
-        $image = new Image;
-        $image->imageUrl = $data['imageUrl'];
-        $image->gallery()->associate($gallery);
-        $image->save();
+       
+
+        $images = $data['images'];
+        foreach($images as $image){
+            Image::create([
+                'imageUrl'=>$image,
+                'gallery_id'=>$gallery->id
+            ]);
+        }
 
         return response()->json($gallery);
        
